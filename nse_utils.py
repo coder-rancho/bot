@@ -19,8 +19,12 @@ def getCookies():
         r = session.get(BASE_URL, headers=headers, timeout=5)
         cookies = dict(r.cookies)
         print("cookies received.")
+# //////////////////////////
+        print(cookies)
+# //////////////////////////
         return cookies
     except requests.exceptions.Timeout:
+        print("Timeout while accessing cookies")
         return None
 
 
@@ -29,8 +33,8 @@ def getCookies():
 def stock_quote(symbol):
     symbol = requests.utils.quote(symbol.upper())
     STOCK_URL = f"https://www.nseindia.com/api/quote-equity?symbol={symbol}"
-    cookies = getCookies()
 
+    cookies = getCookies()
     if( not( cookies )): return None
     
     try:
