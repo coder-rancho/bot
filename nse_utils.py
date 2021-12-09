@@ -15,8 +15,8 @@ INDEX_URL = "https://www.nseindia.com/api/chart-databyindex?index=NIFTY%2050&ind
 def getCookies():
     try:
         print("catching cookies...")
-        base_url = "https://www.nseindia.com"
-        r = session.get(base_url, headers=headers, timeout=5)
+        BASE_URL = "https://www.nseindia.com/get-quotes"
+        r = session.get(BASE_URL, headers=headers, timeout=5)
         cookies = dict(r.cookies)
         print("cookies received.")
         return cookies
