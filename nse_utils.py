@@ -21,16 +21,18 @@ def getCookies():
         print("cookies received.")
         return cookies
     except requests.exceptions.Timeout:
-        print("Timeout while accessing cookies")
-        return dict()
+        return None
 
 
 
 # STOCK
 def stock_quote(symbol):
     symbol = requests.utils.quote(symbol.upper())
-    cookies = getCookies()
     STOCK_URL = f"https://www.nseindia.com/api/quote-equity?symbol={symbol}"
+    cookies = getCookies()
+
+    if( not( cookies )): return None
+    
     try:
         print(f"Getting quote for {symbol}")
         response = requests.get(STOCK_URL, headers=headers, cookies=cookies)
@@ -39,7 +41,7 @@ def stock_quote(symbol):
         return quote
     except requests.exceptions.Timeout:
         print("Timeout while getting quote")
-        return {"msg": "timeout"}
+        return None
 
 
 
@@ -56,7 +58,7 @@ def index_quote(symbol):
     except requests.exceptions.Timeout:
          print("Timeout while getting quote")
          return {"msg": "timeout"}
-         
+
 
 
 # PRICE
@@ -69,6 +71,7 @@ def get_price(symbol):
     
     if ( type == 'stock' ):
         quote = stock_quote(symbol)
+        if ( not( quote )): return "Sorry Something went wrong."
         return f"Last traded price of {symbol} is {quote['priceInfo']['lastPrice']}"
 
     if ( type == 'index' ):
