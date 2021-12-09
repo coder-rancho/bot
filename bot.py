@@ -2,7 +2,7 @@ import telegram.ext as tg
 from os import environ
 import nse_utils
 
-TOKEN = "2141022676:AAFNMDoVCDH_IM7rb7bgtoWi9RYm8UQdizc"
+TOKEN = "2141022676:AAGrCeD0dlrWxs5irKLS4yRha_UwwGTZEQw"
 
 
 # MESSAGE HANDLER
