@@ -57,7 +57,7 @@ def index_quote(symbol):
         return quote
     except requests.exceptions.Timeout:
          print("Timeout while getting quote")
-         return {"msg": "timeout"}
+         return None
 
 
 
@@ -76,6 +76,7 @@ def get_price(symbol):
 
     if ( type == 'index' ):
         quote = index_quote(symbol)
+        if ( not(quote) ): return "Sorry something went wrong"
         if (market_status() == "closed"):
             return f"Closing price of {symbol} is {quote['closePrice']}"
         # else:
